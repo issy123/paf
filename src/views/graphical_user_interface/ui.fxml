@@ -34,11 +34,11 @@
             <Label fx:id="trainLabel" style="-fx-font-weight: bold;" text="Train 'unnamed train'" />
             <Label text="Wagon name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Wagon type" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="addWagonButton" mnemonicParsing="false" text="Add wagon" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+            <Button fx:id="addWagonButton" disable="true" mnemonicParsing="false" text="Add wagon" GridPane.columnIndex="3" GridPane.rowIndex="2" />
             <TextField fx:id="wagonName" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <ChoiceBox fx:id="wagonTypes" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label text="Wagon" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="removeWagonButton" mnemonicParsing="false" text="Remove wagon" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Button fx:id="removeWagonButton" disable="true" mnemonicParsing="false" text="Remove wagon" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <ChoiceBox fx:id="wagonDropdown" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label style="-fx-font-weight: bold;" text="New train" GridPane.columnIndex="5" />
             <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
@@ -46,6 +46,7 @@
             <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="4" />
             <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
             <Separator orientation="VERTICAL" prefHeight="200.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <Button fx:id="deleteTrainButton" disable="true" mnemonicParsing="false" text="Delete this train" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>

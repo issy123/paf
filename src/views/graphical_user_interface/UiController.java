@@ -23,6 +23,7 @@ import javafx.scene.input.KeyCode;
 import mechanics.CommandParser;
 import mechanics.Logger;
 import mechanics.TrainFacade;
+import views.graphical_user_interface.dialogs.*;
 
 /**
  *
@@ -34,11 +35,17 @@ public class UiController implements Initializable {
     public Button addWagonButton;
     public ChoiceBox wagonDropdown;
     public Button removeWagonButton;
+    public Button deleteTrainButton;
     public TextField trainName;
     public Button createTrainButton;
     public Label trainLabel;
     public TabPane trainTabs;
     public TrainFacade trainFacade = TrainFacade.getInstance();
+    public Dialog invalidTrainNameDialog = new InvalidTrainNameDialog();
+    public Dialog emptyTrainNameDialog = new EmptyTrainNameDialog();
+    public Dialog invalidWagonNameDialog = new InvalidWagonNameDialog();
+    public Dialog emptyWagonNameDialog = new EmptyWagonNameDialog();
+    public Dialog noWagonSelectedDialog = new NoWagonSelectedDialog();
     private final CommandParser parser = CommandParser.getInstance();
     
     @Override
@@ -46,6 +53,7 @@ public class UiController implements Initializable {
         registerCreateTrainAction();
         registerAddWagonAction();
         registerRemoveWagonAction();
+        registerDeleteTrainAction();
         trainTabs.getTabs().get(0).setText("Unnamed train");
         trainFacade.addObserver(new TabsObserver(trainTabs));
         wagonTypes.setItems(FXCollections.observableArrayList(
@@ -81,38 +89,63 @@ public class UiController implements Initializable {
             String newTrainName = this.trainName.getText().trim();
             //check if name has no spaces and only contains letters and numbers
             if(newTrainName.isEmpty() || !isValidName(newTrainName)){
-                Alert alert = new Alert(AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
                 if(newTrainName.isEmpty()){
-                    alert.setHeaderText("No train name given.");
-                    alert.setContentText("You have not given any train name. please give us a name to use.");
+                    emptyTrainNameDialog.show();
                 }else if(!isValidName(newTrainName)){
-                    alert.setHeaderText("The train name given is invalid.");
-                    alert.setContentText("You have given an invalid train name. Please use only alphabetic characters and numbers");
+                    invalidTrainNameDialog.show();
                 }
-
-                alert.showAndWait();
+                
                 trainName.setText("");
                 return;
             }
-            parser.parse("new train " + trainName.getText());
-            System.out.println("create train button pressed");
+            parser.parse("new train " + newTrainName);
+            if(trainFacade.getTrains().size() != 0){
+                addWagonButton.setDisable(false);
+                removeWagonButton.setDisable(false);
+                deleteTrainButton.setDisable(false);
+            }
+            trainName.setText("");
         });
     }
     public void registerAddWagonAction(){
         addWagonButton.setOnAction((e) -> {
-            System.out.println("add wagon button pressed");
+            String newWagonName = this.wagonName.getText().trim();
+            //check if name has no spaces and only contains letters and numbers
+            if(newWagonName.isEmpty() || !isValidName(newWagonName)){
+                if(newWagonName.isEmpty()){
+                    emptyWagonNameDialog.show();
+                }else if(!isValidName(newWagonName)){
+                    invalidWagonNameDialog.show();
+                }
+                
+                wagonName.setText("");
+                return;
+            }
+            parser.parse("new wagon " + newWagonName);
+            wagonName.setText("");
         });
         
     }
     public void registerRemoveWagonAction(){
         removeWagonButton.setOnAction((e) -> {
+            if(wagonDropdown.getSelectionModel().getSelectedItem() == null){
+                noWagonSelectedDialog.show();
+                return;
+            }
+            System.out.println(trainTabs.getSelectionModel().getSelectedItem().getText());
+//            parser.parse();
             System.out.println("remove wagon button pressed");
         });
         
     }
+    public void registerDeleteTrainAction(){
+        deleteTrainButton.setOnAction((e) -> {
+            System.out.println("remove train button pressed");
+        });
+        
+    }
     public boolean isValidName(String s){
-        String pattern= "^[a-zA-Z0-9]{1,3}$";
+        String pattern= "^[a-zA-Z0-9]{2,}$";
         return s.matches(pattern);
     }
 }
