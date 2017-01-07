@@ -14,7 +14,7 @@ import javafx.scene.control.TabPane;
 import mechanics.TrainFacade;
 import mechanics.TrainFacadeException;
 import model.Train;
-import views.shared.DrawableCanvas;
+import views.shared.TrainCanvas;
 
 /**
  *
@@ -33,7 +33,7 @@ public class TabsObserver  implements Observer {
         if(trains.size() > trainSize){
             trainSize = trains.size();
             Train train = trains.get(trains.size() - 1);
-            DrawableCanvas canvas = new DrawableCanvas(train);
+            TrainCanvas canvas = new TrainCanvas(train);
             o.addObserver(canvas);
             canvas.update(null, null);
             if(trains.size() == 1){
@@ -62,7 +62,7 @@ public class TabsObserver  implements Observer {
      * @param canvas The drawable canvas.
      * @return The created tab.
      */
-    public Tab createTab(String name, DrawableCanvas canvas) {
+    public Tab createTab(String name, TrainCanvas canvas) {
         Tab tab = new Tab(name, canvas);
         tab.setOnCloseRequest((e) -> {
             TrainFacade.getInstance().removeTrain(name);

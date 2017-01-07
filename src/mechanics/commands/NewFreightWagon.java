@@ -4,10 +4,11 @@ import mechanics.Command;
 import mechanics.CommandParser;
 import mechanics.Logger;
 import mechanics.TrainFacade;
+import model.FreightWagon;
 import model.Wagon;
 import model.PassengerWagon;
 
-public class NewPassengerWagon implements Command {
+public class NewFreightWagon implements Command {
 
     @Override
     public void execute(String[] arguments) throws Exception {
@@ -26,13 +27,13 @@ public class NewPassengerWagon implements Command {
             }
             
         }
-        Wagon wagon = TrainFacade.getInstance().createWagon(new PassengerWagon(arguments[0], seats));
+        Wagon wagon = TrainFacade.getInstance().createWagon(new FreightWagon(arguments[0]));
         Logger.log("Passenger wagon " + arguments[0] + " has been created with " + wagon.getSeats() + " seats.");
     }
 
     @Override
     public String name() {
-        return "new passenger wagon";
+        return "new freight wagon";
     }
 
     @Override

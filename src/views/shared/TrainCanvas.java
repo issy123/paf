@@ -9,14 +9,14 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class DrawableCanvas extends Canvas implements Observer {
+public class TrainCanvas extends Canvas implements Observer {
 
     /**
      * The train of this observer.
      */
     private final Train train;
 
-    public DrawableCanvas(Train train) {
+    public TrainCanvas(Train train) {
         super(1000, 300);
         this.train = train;
     }

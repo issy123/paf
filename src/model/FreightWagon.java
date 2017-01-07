@@ -7,4 +7,8 @@ public class FreightWagon extends Wagon {
         super(name, 2);
     }
 
+    @Override
+    public String getShape() {
+        return "freight_wagon";
+    }
 }

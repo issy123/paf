@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.command_line_interface;
+package views.graphical_user_interface;
 
 import java.io.IOException;
 import java.net.URL;
@@ -28,9 +28,9 @@ public class UserInterface extends Application{
     @Override
     public void start(Stage primaryStage) throws IOException {
         mechanics.start();
-        FXMLLoader loader = new FXMLLoader(new URL("file:src/views/command_line_interface/ui.fxml"));
+        FXMLLoader loader = new FXMLLoader(new URL("file:src/views/graphical_user_interface/ui.fxml"));
         Parent root = loader.load();
-        primaryStage.setTitle("Commandline interface");
+        primaryStage.setTitle("Graphical interface");
         primaryStage.setScene(new Scene(root, 300, 250));
         primaryStage.show();
         primaryStage.setHeight(500);

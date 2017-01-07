@@ -1,0 +1,12 @@
+.text-area {
+    -fx-font-family: Consolas;
+    -fx-font-size: 13;
+    -fx-display-caret:true;
+     -fx-padding: 0px;
+}
+.text-area#commandOutput{
+    -fx-text-fill: #ffffff;
+}
+.text-area#commandOutput .content {
+    -fx-background-color: #000000;
+}

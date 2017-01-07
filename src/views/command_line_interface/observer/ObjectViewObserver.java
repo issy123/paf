@@ -72,6 +72,10 @@ public class ObjectViewObserver implements Observer{
         });
     }
     private void output(String text){
-        display.appendText("\n" + text);
+        if(display.getText().isEmpty()){
+            display.setText(text);
+        }else{
+            display.appendText("\n" + text);
+        }
     }
 }

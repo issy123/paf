@@ -5,13 +5,13 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import mechanics.shape.Shape;
 
-public class TrainShape implements Shape {
+public class FreightWagonShape implements Shape {
 
     @Override
     public void draw(Canvas canvas, int offset) {
         GraphicsContext context = canvas.getGraphicsContext2D();
-        context.drawImage(new Image("file:resources/img/TrainLeftTrans.png", 150, 150, true, true), 0, 0);
-        context.fillText("Train", 70, 155);
+        context.drawImage(new Image("file:resources/img/freightWagon.png", 150, 150, true, true), 150 + (offset * 150), 55);
+        context.fillText("Freight wagon", 180 + (offset * 150), 155);
     }
 
 }

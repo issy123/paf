@@ -33,8 +33,12 @@ public class UiController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         input.setOnKeyPressed((e) -> {
             if (e.getCode().equals(KeyCode.ENTER)) {
-                output(input.getText());
-                String parse = parser.parse(input.getText());
+                String command = input.getText();
+                if(command.isEmpty()){
+                    return;
+                }
+                output(command);
+                String parse = parser.parse(command);
                 if(!parse.isEmpty()){
                     output(parse);
                 }
@@ -50,7 +54,11 @@ public class UiController implements Initializable {
     }
     
     public void output(String text){
-        commandOutput.appendText("\n" + text);
+        if(commandOutput.getText().isEmpty()){
+            commandOutput.setText(text);
+        }else{
+            commandOutput.appendText("\n" + text);
+        }
         commandOutput.selectPositionCaret(commandOutput.getLength()); 
         commandOutput.deselect(); 
     }

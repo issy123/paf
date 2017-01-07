@@ -28,10 +28,12 @@ public class Main {
         commandParser.register(new WagonNumSeats());
         commandParser.register(new DeleteWagonCommand());
         commandParser.register(new NewPassengerWagon());
+        commandParser.register(new NewFreightWagon());
     }
     private void registerShapes(){
         ShapeFactory.register("train", new TrainShape());
         ShapeFactory.register("wagon", new WagonShape());
         ShapeFactory.register("passenger_wagon", new PassengerWagonShape());
+        ShapeFactory.register("freight_wagon", new FreightWagonShape());
     }
 }
