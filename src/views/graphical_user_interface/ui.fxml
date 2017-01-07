@@ -6,13 +6,9 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.graphical_user_interface.UiController">
    <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="trainTabs" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </Tab>
+          <Tab text="Untitled Tab 1" />
         </tabs>
       </TabPane>
       <GridPane prefHeight="201.0" prefWidth="605.0">
@@ -32,9 +28,9 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Train name" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-            <TextField fx:id="trainName" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <Button fx:id="createTrainButton" mnemonicParsing="false" text="Create train" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+            <Label text="Train name" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+            <TextField fx:id="trainName" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+            <Button fx:id="createTrainButton" mnemonicParsing="false" text="Create train" GridPane.columnIndex="5" GridPane.rowIndex="3" />
             <Label fx:id="trainLabel" style="-fx-font-weight: bold;" text="Train 'unnamed train'" />
             <Label text="Wagon name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Wagon type" GridPane.columnIndex="2" GridPane.rowIndex="1" />

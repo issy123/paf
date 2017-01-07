@@ -8,6 +8,7 @@ package views.graphical_user_interface;
 import views.command_line_interface.observer.*;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -36,6 +37,8 @@ public class UiController implements Initializable {
     public TextField trainName;
     public Button createTrainButton;
     public Label trainLabel;
+    public TabPane trainTabs;
+    public TrainFacade trainFacade = TrainFacade.getInstance();
     private final CommandParser parser = CommandParser.getInstance();
     
     @Override
@@ -43,6 +46,15 @@ public class UiController implements Initializable {
         registerCreateTrainAction();
         registerAddWagonAction();
         registerRemoveWagonAction();
+        trainTabs.getTabs().get(0).setText("Unnamed train");
+        trainFacade.addObserver(new TabsObserver(trainTabs));
+        wagonTypes.setItems(FXCollections.observableArrayList(
+                new KeyValuePair("1", "Wagon"),
+                new KeyValuePair("2", "Freight wagon"),
+                new KeyValuePair("3", "Passenger wagon")
+            )
+        );
+        wagonTypes.getSelectionModel().selectFirst();
 //        input.setOnKeyPressed((e) -> {
 //            if (e.getCode().equals(KeyCode.ENTER)) {
 //                String command = input.getText();
@@ -66,12 +78,24 @@ public class UiController implements Initializable {
     }
     public void registerCreateTrainAction(){
         createTrainButton.setOnAction((e) -> {
-            Alert alert = new Alert(AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText("Look, an Information Dialog");
-            alert.setContentText("I have a great message for you!");
+            String newTrainName = this.trainName.getText().trim();
+            //check if name has no spaces and only contains letters and numbers
+            if(newTrainName.isEmpty() || !isValidName(newTrainName)){
+                Alert alert = new Alert(AlertType.INFORMATION);
+                alert.setTitle("Information Dialog");
+                if(newTrainName.isEmpty()){
+                    alert.setHeaderText("No train name given.");
+                    alert.setContentText("You have not given any train name. please give us a name to use.");
+                }else if(!isValidName(newTrainName)){
+                    alert.setHeaderText("The train name given is invalid.");
+                    alert.setContentText("You have given an invalid train name. Please use only alphabetic characters and numbers");
+                }
 
-            alert.showAndWait();
+                alert.showAndWait();
+                trainName.setText("");
+                return;
+            }
+            parser.parse("new train " + trainName.getText());
             System.out.println("create train button pressed");
         });
     }
@@ -86,5 +110,9 @@ public class UiController implements Initializable {
             System.out.println("remove wagon button pressed");
         });
         
-    }    
+    }
+    public boolean isValidName(String s){
+        String pattern= "^[a-zA-Z0-9]{1,3}$";
+        return s.matches(pattern);
+    }
 }
