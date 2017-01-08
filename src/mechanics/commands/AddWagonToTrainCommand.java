@@ -10,7 +10,7 @@ public class AddWagonToTrainCommand implements Command {
     @Override
     public void execute(String[] arguments) throws Exception {
         TrainFacade.getInstance().addWagon(arguments[0], arguments[2]);
-        Logger.log("Wagon " + arguments[1] + " has been added to train " + arguments[0] + ".");
+        Logger.log("Wagon " + arguments[0] + " has been added to train " + arguments[2] + ".");
     }
 
     @Override

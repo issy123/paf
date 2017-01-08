@@ -8,7 +8,7 @@
    <children>
       <TabPane fx:id="trainTabs" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
-          <Tab text="Untitled Tab 1" />
+          <Tab text="Unnamed train" />
         </tabs>
       </TabPane>
       <GridPane prefHeight="201.0" prefWidth="605.0">
@@ -31,7 +31,7 @@
             <Label text="Train name" GridPane.columnIndex="5" GridPane.rowIndex="1" />
             <TextField fx:id="trainName" GridPane.columnIndex="5" GridPane.rowIndex="2" />
             <Button fx:id="createTrainButton" mnemonicParsing="false" text="Create train" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-            <Label fx:id="trainLabel" style="-fx-font-weight: bold;" text="Train 'unnamed train'" />
+            <Label fx:id="trainLabel" style="-fx-font-weight: bold;" text="Train: Unnamed train" />
             <Label text="Wagon name" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Label text="Wagon type" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Button fx:id="addWagonButton" disable="true" mnemonicParsing="false" text="Add wagon" GridPane.columnIndex="3" GridPane.rowIndex="2" />

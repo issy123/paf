@@ -37,7 +37,6 @@ public class TrainFacade extends Observable {
     }
 
     public Train createTrain(String name) throws TrainFacadeException {
-        System.out.println("CREATE TRAIN");
         if (getTrain(name) != null) {
             throw new TrainFacadeException("There is already a train with this name, please choose another name.");
         }
@@ -64,7 +63,6 @@ public class TrainFacade extends Observable {
     }
 
     public void addWagon(String wagonName, String trainName) throws TrainFacadeException {
-        System.out.println("ADD WAGON");
         Train train = getTrain(trainName);
         if (train == null) {
             throw new TrainFacadeException("The name of the train you tried to add a wagon to, doesn't exist.");
@@ -81,7 +79,6 @@ public class TrainFacade extends Observable {
     }
 
     public int getTrainSeats(String name) throws TrainFacadeException {
-        System.out.println("GET TRAIN SEATS");
         Train train = getTrain(name);
         if (train == null) {
             throw new TrainFacadeException("The name of the train you tried to count the seats of, doesn't exist.");
@@ -90,7 +87,6 @@ public class TrainFacade extends Observable {
     }
 
     public Train deleteTrain(String name) throws TrainFacadeException {
-        System.out.println("DELETE TRAIN");
         Train train = removeTrain(name);
         if (train == null) {
             throw new TrainFacadeException("The train you tried to delete doesn't exist.");
@@ -100,7 +96,6 @@ public class TrainFacade extends Observable {
     }
 
     public Wagon createWagon(Wagon wagon) throws TrainFacadeException {
-        System.out.println("CREATE WAGON");
         if (wagons.get(wagon.getName()) != null) {
             throw new TrainFacadeException("There is already a wagon with this name.");
         }
@@ -110,7 +105,6 @@ public class TrainFacade extends Observable {
     }
 
     public Wagon createWagon(String name, int seats) throws TrainFacadeException {
-        System.out.println("CREATE WAGON WITH SEATS");
         if (wagons.get(name) != null) {
             throw new TrainFacadeException("There is already a wagon with this name.");
         }
@@ -129,7 +123,6 @@ public class TrainFacade extends Observable {
     }
 
     public Wagon deleteWagon(String trainName, String wagonName) throws TrainFacadeException {
-        System.out.println("DELETE WAGON");
         Train train = getTrain(trainName);
         if (train == null) {
             throw new TrainFacadeException("The train " + trainName + " you tried to delete a wagon from, doesn't exist.");

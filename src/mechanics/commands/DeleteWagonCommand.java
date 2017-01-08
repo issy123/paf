@@ -9,18 +9,18 @@ public class DeleteWagonCommand implements Command {
 
     @Override
     public void execute(String[] arguments) throws Exception {
-        TrainFacade.getInstance().deleteWagon(arguments[0], arguments[1]);
+        TrainFacade.getInstance().deleteWagon(arguments[2], arguments[0]);
         Logger.log("Wagon " + arguments[1] + " has been deleted from train " + arguments[0] + ".");
     }
 
     @Override
     public String name() {
-        return "delete wagon";
+        return "remove";
     }
 
     @Override
     public String[] requiredArguments() {
-        return new String[]{ "train name", "wagon name" };
+        return new String[]{ "wagon name", "from", "train name" };
     }
 
     @Override

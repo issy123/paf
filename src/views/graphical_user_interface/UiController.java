@@ -5,24 +5,20 @@
  */
 package views.graphical_user_interface;
 
-import views.command_line_interface.observer.*;
+import views.shared.observer.TabsObserver;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import mechanics.CommandParser;
-import mechanics.Logger;
 import mechanics.TrainFacade;
+import model.Wagon;
 import views.graphical_user_interface.dialogs.*;
 
 /**
@@ -47,6 +43,7 @@ public class UiController implements Initializable {
     public Dialog emptyWagonNameDialog = new EmptyWagonNameDialog();
     public Dialog noWagonSelectedDialog = new NoWagonSelectedDialog();
     private final CommandParser parser = CommandParser.getInstance();
+    private String currentTrain;
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -54,12 +51,13 @@ public class UiController implements Initializable {
         registerAddWagonAction();
         registerRemoveWagonAction();
         registerDeleteTrainAction();
+        registerChangeTabAction();
         trainTabs.getTabs().get(0).setText("Unnamed train");
         trainFacade.addObserver(new TabsObserver(trainTabs));
         wagonTypes.setItems(FXCollections.observableArrayList(
-                new KeyValuePair("1", "Wagon"),
-                new KeyValuePair("2", "Freight wagon"),
-                new KeyValuePair("3", "Passenger wagon")
+                new KeyValuePair("", "Wagon"),
+                new KeyValuePair(" freight", "Freight wagon"),
+                new KeyValuePair(" passenger", "Passenger wagon")
             )
         );
         wagonTypes.getSelectionModel().selectFirst();
@@ -101,8 +99,8 @@ public class UiController implements Initializable {
             parser.parse("new train " + newTrainName);
             if(trainFacade.getTrains().size() != 0){
                 addWagonButton.setDisable(false);
-                removeWagonButton.setDisable(false);
                 deleteTrainButton.setDisable(false);
+                displayCurrentTrainName();
             }
             trainName.setText("");
         });
@@ -121,29 +119,55 @@ public class UiController implements Initializable {
                 wagonName.setText("");
                 return;
             }
-            parser.parse("new wagon " + newWagonName);
+            KeyValuePair wagonType = (KeyValuePair) wagonTypes.getSelectionModel().getSelectedItem();
+            parser.parse("new" + wagonType.getKey() + " wagon " + newWagonName);
+            parser.parse("add " + newWagonName + " to " + trainTabs.getSelectionModel().getSelectedItem().getText());
             wagonName.setText("");
+            updateWagonsList();
         });
         
     }
     public void registerRemoveWagonAction(){
         removeWagonButton.setOnAction((e) -> {
-            if(wagonDropdown.getSelectionModel().getSelectedItem() == null){
+            String wagonName = wagonDropdown.getSelectionModel().getSelectedItem().toString();
+            if(wagonName == null){
                 noWagonSelectedDialog.show();
                 return;
             }
-            System.out.println(trainTabs.getSelectionModel().getSelectedItem().getText());
-//            parser.parse();
-            System.out.println("remove wagon button pressed");
+            parser.parse("remove " + wagonName + " from " + currentTrain);
+            updateWagonsList();
         });
         
     }
     public void registerDeleteTrainAction(){
         deleteTrainButton.setOnAction((e) -> {
-            System.out.println("remove train button pressed");
+            parser.parse("delete train " + currentTrain);
         });
         
     }
+    public void registerChangeTabAction(){
+        trainTabs.getSelectionModel().selectedItemProperty().addListener((e) ->{
+            displayCurrentTrainName();
+        });
+    }
+    public void displayCurrentTrainName(){
+            currentTrain = trainTabs.getSelectionModel().getSelectedItem().getText();
+            trainLabel.setText("Train: " + currentTrain);
+        
+    }
+    public void updateWagonsList(){
+        wagonDropdown.getItems().clear();
+        List<Wagon> wagons = trainFacade.getTrain(currentTrain).getWagons();
+        if(wagons.isEmpty()){
+            removeWagonButton.setDisable(true);
+        }else{
+            removeWagonButton.setDisable(false);
+        }
+        for(int i = 0; i < wagons.size();i++){
+            wagonDropdown.getItems().add(wagons.get(i).getName());
+        }
+    }
+    
     public boolean isValidName(String s){
         String pattern= "^[a-zA-Z0-9]{2,}$";
         return s.matches(pattern);

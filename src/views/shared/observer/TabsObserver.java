@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.command_line_interface.observer;
+package views.shared.observer;
 
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import mechanics.TrainFacade;
@@ -42,6 +43,20 @@ public class TabsObserver  implements Observer {
                 return;
             }
             createTab(train.getName(),canvas);
+        }
+        if(trains.size() < trainSize){
+            trainSize = trains.size();
+            if(trains.size() == 0){
+                trainTabs.getTabs().get(0).setContent(null);
+                trainTabs.getTabs().get(0).setText("Unnamed train");
+                return;
+            }
+            ObservableList<Tab> tabs = trainTabs.getTabs();
+            for(int i =0; i < tabs.size();i++){
+                if(i > trains.size()-1 || !tabs.get(i).getText().equals(trains.get(i).getName())){
+                    closeTab(tabs.get(i).getText());
+                }
+            }
         }
         //WHEN NEW TRAIN IS CREATED, create a new tab:
         /*

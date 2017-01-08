@@ -28,7 +28,7 @@ public class NewFreightWagon implements Command {
             
         }
         Wagon wagon = TrainFacade.getInstance().createWagon(new FreightWagon(arguments[0]));
-        Logger.log("Passenger wagon " + arguments[0] + " has been created with " + wagon.getSeats() + " seats.");
+        Logger.log("Freight wagon " + arguments[0] + " has been created with " + wagon.getSeats() + " seats.");
     }
 
     @Override

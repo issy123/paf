@@ -38,15 +38,19 @@ public class UserInterface extends Application{
         primaryStage.setMaxHeight(520);
         primaryStage.setMaxWidth(950);
         
-//        CommandParser.getInstance().parse("delete train tr1");
-//        CommandParser.getInstance().parse("new train Train1");
-//        CommandParser.getInstance().parse("new train Train1");
-//        CommandParser.getInstance().parse("delete wagon Wagon1 Train1");
-//        CommandParser.getInstance().parse("new wagon Wagon1");
-//        CommandParser.getInstance().parse("new wagon Wagon1 hihihi");
-//        CommandParser.getInstance().parse("new wagon Wagon1 25");
-//        CommandParser.getInstance().parse("new wagon Wagon1 55");
-//        CommandParser.getInstance().parse("new passenger wagon Passenger1 10");
-//        CommandParser.getInstance().parse("getnumseats wagon Wagon1");
+        CommandParser.getInstance().parse("delete train tr1");
+        CommandParser.getInstance().parse("new train train1");
+        CommandParser.getInstance().parse("new train train1");
+        CommandParser.getInstance().parse("remove wagon1 from train1");
+        CommandParser.getInstance().parse("new wagon wagon1");
+        CommandParser.getInstance().parse("new wagon wagon1");
+        CommandParser.getInstance().parse("add wagon1 to train1");
+        CommandParser.getInstance().parse("new passenger wagon passenger1");
+        CommandParser.getInstance().parse("add passenger1 to train1");
+        CommandParser.getInstance().parse("new freight wagon freight1");
+        CommandParser.getInstance().parse("new freight wagon freight1");
+        CommandParser.getInstance().parse("add freight1 to train1");
+        CommandParser.getInstance().parse("add freight1 to train1");
+        CommandParser.getInstance().parse("getnumseats wagon wagon1");
     }
 }

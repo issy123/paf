@@ -5,6 +5,7 @@
  */
 package views.command_line_interface;
 
+import views.shared.observer.TabsObserver;
 import views.command_line_interface.observer.*;
 import java.net.URL;
 import java.util.ResourceBundle;
