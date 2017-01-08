@@ -19,9 +19,9 @@ Also I implemented the following design patterns:
 
 
 ## CLI
-run src/views/command_line_interface/UserInterface.java
+run `src/views/command_line_interface/UserInterface.java`
 
-To test out all possible commands uncomment line xx-xx in src/views/command_line_interface/UserInterface.java
+**NOTE**: To remove existing trains and wagons uncomment line 41-54 in src/views/command_line_interface/UserInterface.java
 
 Commands:
 
@@ -37,6 +37,6 @@ Commands:
 | delete wagon \<wagonname\>                           | delete wagon wagon1                           |
 
 ## GUI
-run src/views/graphical_user_interface/UserInterface.java
+run `src/views/graphical_user_interface/UserInterface.java`
 
-To test out all possible commands uncomment line xx-xx in src/views/graphical_user_interface/UserInterface.java
+**NOTE**: To remove existing trains and wagons uncomment line 41-54 in src/views/command_line_interface/UserInterface.java
