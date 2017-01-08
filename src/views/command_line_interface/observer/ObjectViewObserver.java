@@ -46,7 +46,7 @@ public class ObjectViewObserver implements Observer{
             List<Wagon> wagons = train.getWagons();
             for(int i = 0; i < wagons.size(); i++){
                 Wagon wagon = wagons.get(i);
-                wagonsToString += "\n    Name: "+wagon.getName() + " Seats: " + wagon.getSeats();
+                wagonsToString += "\n    Name: "+wagon.getName() + " Seats: " + wagon.getSeats() + " Type: " + wagon.getShape();
                 if(i + 1 < wagons.size()){
                     wagonsToString += ", ";
                 }else{
@@ -68,7 +68,7 @@ public class ObjectViewObserver implements Observer{
         }
         wagons.entrySet().forEach((pair) -> {
             Wagon wagon = (Wagon)pair.getValue();
-            output("Name: " + pair.getKey() + " Seats: " + wagon.getSeats());
+            output("Name: " + pair.getKey() + " Seats: " + wagon.getSeats() + "Type: " + wagon.getShape());
         });
     }
     private void output(String text){
